@@ -30,10 +30,8 @@ var nameSchema = new mongoose.Schema(
     })
     .catch(err => {
     res.status(400).send("unable to share to TIC");
-    });
-    console.log(myData);
-   });
-
+    });he
+   
 
 
 var nameSchema = new mongoose.Schema(
@@ -60,9 +58,8 @@ app.post("/register", (req, res) => {
     .catch(err => {
     res.status(400).send("unable to save to database");
     });
-    console.log(myData);
-   });
 
+ 
 app.listen(process.env.PORT || 3000, function(){
     console.log("running on port 3000")
 })
