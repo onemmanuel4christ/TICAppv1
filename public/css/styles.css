@@ -16,7 +16,7 @@ body {
   
   .big-heading {
     font-family: "Montserrat-Black";
-    font-size: 3.5rem;
+    font-size: 3.0rem;
     line-height: 1.5;
   }
   
@@ -24,11 +24,11 @@ body {
     font-size: 3rem;
     line-height: 1.5;
   }
-  
+ 
   /* Containers */
   
   .container-fluid{
-    padding: 7% 15%;
+    padding: 2% 5%;
   }
   
   /* Sections */
@@ -84,7 +84,7 @@ body {
   /* Title Image */
   
   .title-image {
-    width: 60%;
+    width: 50%;
     transform: rotate(25deg);
     position: absolute;
     right: 30%;
@@ -118,7 +118,19 @@ body {
   #testimonials {
     background-color: #27496d;
   }
-  
+  #from{
+    text-align: left;
+    font-style: italic;
+    color: #27496d;
+    font-weight: bold;
+  }
+
+  #login-card {
+    border: 2px;
+  }
+  .form-signin{
+    margin: 2%;
+  }
   
   .testimonial-image {
     width: 90%;
@@ -127,7 +139,10 @@ body {
     margin: 20px;
   }
   
+  .signin{
+    background-image: -webkit-linear-gradient(65deg, #27496d 40%,  #A683E3 50%);
   
+  }
   
 
   
@@ -152,11 +167,22 @@ body {
   }
   #footer{
       color: black;
-      font-size: 1.5rem;
+      font-size: 1.0rem;
+      text-align: left;
+  }
+  #testimonial-text{
+    color: black;
+    font-size: 1.0rem;
+    text-align: justify;
   }
   
   #action{
       font-size: 2.0rem;
+  }
+
+  #cc{
+    text-align: center;
+    font-size: 0.8rem;
   }
   .social-icon {
     margin: 20px 10px;

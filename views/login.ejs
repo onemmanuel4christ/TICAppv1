@@ -1,0 +1,36 @@
+<%- include("header") -%>
+<br>
+  <div class=" card signin mx-auto" style="width: 18rem;" id="login-card ">
+     <form class="form-signin">
+        <div class="text-center mb-4">
+            <br>
+            <h1 class="h3 mb-3 font-weight-normal">Admin only</h1>
+          <img class="mb-4" src="/images/signin.jpg" alt="sign in imag" width="72" height="72">
+          
+         </div>
+      
+        <div class="form-label-group">
+          <input type="text" class="form-control" placeholder="Admin-ID" required="" autofocus="">
+          
+        </div>
+        <br>
+      
+        <div class="form-label-group">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+          
+        </div>
+      
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" href="/admin">Sign in</button>
+        
+      </form>
+  </div>
+<br>
+<br>
+
+
+<%- include("footer") -%>

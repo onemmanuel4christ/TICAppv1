@@ -1,41 +1,99 @@
 const express = require('express')
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+let msgs = [];
+let foundMessages = [];
+let foundMembers = [];
+
 
 const app = express()
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-mongoose.connect("mongodb://localhost:27017/ticDB", {useNewUrlParser: true, useUnifiedTopology: true});
+app.use(express.static('public'));
 
+app.get('/', function (req, res) {
+      res.render('index', {
+        msgs: msgs        
+    });
+});
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/index.html")
+// DB COnnection
+mongoose.connect("mongodb://localhost:27017/intercessorsDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+// testimony schem
+const testimonySchema = new mongoose.Schema({
+    myName: String,
+    myTitle: String,
+    myTestimony: String
+});
+
+const Testimony = mongoose.model("Testimony", testimonySchema);
+
+//////////////////////////////target for all/////////////////////////////////////////
+app.route("/testimony")
+.get(function(req, res){
+    Testimony.find(function(err, foundMessages){
+        if(!err){
+             msgs = foundMessages;
+             res.redirect("/")
+        }else{
+            res.send(err);
+        }
+              
+    });
 })
-var nameSchema = new mongoose.Schema(
-    {
-    myFullName: String,
-    Mobile: Number,
-   myTestimony:  String
-   });
-   var testimony = mongoose.model("testimony", nameSchema);
 
-   app.post("/testimony", (req, res) => {
-    var myData = new testimony(req.body);
-   myData.save()
-       .then(item => {
-    res.send("You have succefully shared your testimony with TIC ...please wait for approval");
-    })
-    .catch(err => {
-    res.status(400).send("unable to share to TIC");
-    });he
-   
+.post(function(req, res){
+    const newTestimony = new Testimony({
+        myName: req.body.Name,
+        myTitle: req.body.Title,
+        myTestimony: req.body.Testimony
+    });
+    newTestimony.save(function(err){
+        if (!err) {
+            res.send("successfully saved");
+        }else {
+            res.send(err);
+        }
+    });
+})
 
+.delete(function(req, res){
+    Testimony.deleteMany({}, function(err){
+        if(!err) {
+            res.send("Successfully Deleted all");
+        }else{
+            res.send(err);
+        }
+    });
+});
 
-var nameSchema = new mongoose.Schema(
-    {
+//////////////////////////////specifi item/////////////////////////////////////////
+
+app.route("/testimony/:Title")
+
+.get(function (req, res){
+    
+Testimony.findOne({title: req.params.Title}, function(err, foundTestimony){
+if (foundTestimony){
+    res.send(foundTestimony); 
+} else {
+    res.send("No item ");
+}
+})
+
+});
+
+// members schema
+const memberSchema = new mongoose.Schema({
     firstName: String,
     middleName: String,
     lastName: String,
@@ -43,23 +101,57 @@ var nameSchema = new mongoose.Schema(
     email: String,
     gender: String,
     address: String,
+    dateOfBirth: Date,
     city: String,
     state: String
 
-   });
-   var ticMember = mongoose.model("ticMember", nameSchema);
+});
+const Member = mongoose.model("Member", memberSchema);
+
+
 
 app.post("/register", (req, res) => {
-    var myData = new ticMember(req.body);
-   myData.save()
-       .then(item => {
-    res.send("Congratulations! you have successfully Joined The Intercessors! we will get back to you ");
-    })
-    .catch(err => {
-    res.status(400).send("unable to save to database");
-    });
+    const myMember = new Member(req.body);
+    myMember.save()
+        .then(item => {
+            res.send("Congratulations! you have successfully Joined The Intercessors! we will get back to you ");
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+    res.redirect("/")
 
- 
-app.listen(process.env.PORT || 3000, function(){
+});
+
+// to get all members
+
+app.get("/members", function(req, res){
+    Member.find(function(err, foundMembers){
+        if(!err){
+             res.send(foundMembers);
+        }else{
+            res.send(err);
+        }
+              
+    });
+}) ;
+
+
+
+app.get('/admin', function (req, res) {
+    res.render('admin')
+});
+
+
+
+
+app.get('/login', function (req, res) {
+    res.render('login')
+});
+
+
+
+
+app.listen(process.env.PORT || 3000, function () {
     console.log("running on port 3000")
 })

@@ -1,0 +1,167 @@
+<%- include("header") -%>
+
+<!-- Features -->
+
+<section class="white-section" id="features">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-check-circle fa-4x"></i>
+        <h3 class="feature-title">Testimonies</h3>
+        <p>Here we are called Home of testimonies and miracles, join us today!</p>
+      </div>
+
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-bullseye fa-4x"></i>
+        <h3 class="feature-title">Chain Prayer</h3>
+        <p>We will connect with you on whatsapp conference call for night prayers.</p>
+      </div>
+
+      <div class="feature-box col-lg-4">
+        <i class="icon fas fa-heart fa-4x"></i>
+        <h3 class="feature-title">We move in Love and Unity</h3>
+        <p>We dont only pray, we extend the love of God through arms giving.</p>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- share Testimonials -->
+
+<section class="colored-section" id="tes">
+  <div class="container-fluid">
+    <h4> Please Share your Testimonies with TIC as God keep blessing you!</h4>
+    <form action="/testimony" method="POST">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Full Name" value="" required="">
+        <label>Testimony Title</label>
+        <input type="text" class="form-control" name="Title" placeholder="Testimony Title" value="" required="">
+        <label>Compose</label>
+        <textarea rows="5" cols="40" name="Testimony" class="form control form-control
+                                " placeholder="Type Here" value="" required=""></textarea>
+      </div>
+      <button class="btn btn-lg btn-success" type="submit">Share Testimony</button>
+
+    </form>
+  </div>
+
+</section>
+
+<br>
+<section class="container-fluid">
+  <form action="/testimony" method="GET">
+
+    <button type="submit">Read Testimonies</button>
+
+  </form>
+  <div>
+    <h4>Read Our Testimonies and be blessed</h4>
+
+    <br>
+    <% msgs.forEach(function (msg){ %>
+
+    <h4><%= msg.myTitle %></h4>
+
+    <p id="testimonial-text"><%= msg.myTestimony %></p>
+
+    <p id="from">From: <%= msg.myName %></p>
+
+    <% }); %>
+  </div>
+</section>
+
+<!-- testimonial-->
+
+
+
+
+<!-- Call to Action -->
+<section class="colored-section" id="cta">
+  <div class="container-fluid">
+    <h4> Please complete the form below to join TIC </h4>
+    <form action="/register" method="post">
+      <div class="form-group">
+        <label>First name</label>
+        <input type="text" class="form-control" name="firstName" placeholder="First name" value="" required="">
+
+
+
+        <label>Middle name</label>
+        <input type="text" class="form-control" name="middleName" placeholder="Middle Name" value="" required="">
+
+        <label>Last name</label>
+        <input type="text" class="form-control" name="lastName" placeholder="Last Name" value="" required="">
+
+        <label>whatsapp No</label>
+        <input type="text" class="form-control" name="whatsappNo" placeholder="eg 08030001000" value="" required="">
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="gender">Gender</label>
+          <select class="form-control form-control-sm" name="gender">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+
+        <div class=" col-lg-10 ">
+          <label for="email">Email </label>
+          <input type="email" class="form-control form-control-sm" name="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-3">
+          <label>Dateof Birth:</label>
+          <input type="text" class="form-control" name="dateOfBirth" placeholder="eg: 2-Jan-2020">
+        </div>
+        <div class="col-lg-6">
+          <label for="address">Address</label>
+          <input type="text" class="form-control form-control-sm" name="address" placeholder="Residential Address"
+            value="" required="">
+        </div>
+
+        <div class="form-group col-lg-3">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" name="city" placeholder="City of Residence">
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="form-group col-lg-12">
+          <label>State</label>
+          <input type="text" class="form-control" name="state" placeholder="Stae of Residence">
+        </div>
+      </div>
+      <button class="btn btn-lg btn-success" type="submit">Join TIC Group</button>
+    </form>
+
+</section>
+
+<!-- Footer -->
+
+<section class="white-section" id="about">
+  <div class="container-fluid">
+    <h4> About TIC</h4>
+    <p id="footer"> What is Lorem Ipsum?
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a type
+      specimen book. It has survived not only five centuries, but also the leap into
+      electronic typesetting, remaining essentially unchanged. It was popularised in
+      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+      and more recently with desktop publishing software like Aldus PageMaker including
+      versions of Lorem Ipsum</p>
+  </div>
+</section>
+
+<hr>
+
+<%- include("footer") -%>
